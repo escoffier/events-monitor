@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	containerdCli, err := containerd.New("/run/containerd/containerd.sock", containerd.WithTimeout(time.Second*5))
+	containerdCli, err := containerd.New("unix:///run/containerd/containerd.sock", containerd.WithTimeout(time.Second*5))
 	if err != nil {
 		panic(err.Error())
 	}
@@ -84,7 +84,7 @@ func main() {
 
 		case err := <-errs:
 			if err != nil {
-				fmt.Printf("err returned for containerd events. try to restart: %v", err)
+				fmt.Printf("err returned for containerd events. try to restart: %v\n", err)
 				// try to restart listening to container streams
 				msg, errs = newExchange.Subscribe(ctx)
 			}
