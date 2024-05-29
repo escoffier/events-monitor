@@ -40,7 +40,10 @@ func main() {
 		fmt.Sprintf(`topic=="%s"`, runtime.TaskExitEventTopic),
 	}
 
-	msg, errs := containerdCli.Subscribe(ctx, filters...)
+	subCtx, cancelFunc := context.WithCancel(context.Background())
+	defer cancelFunc()
+
+	msg, errs := containerdCli.Subscribe(subCtx, filters...)
 	for {
 		select {
 		case m := <-msg:
@@ -86,7 +89,7 @@ func main() {
 			if err != nil {
 				fmt.Printf("err returned for containerd events. try to restart: %v\n", err)
 				// try to restart listening to container streams
-				msg, errs = newExchange.Subscribe(ctx)
+				msg, errs = newExchange.Subscribe(subCtx)
 				time.Sleep(time.Second * 3)
 			}
 		}
