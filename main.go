@@ -63,7 +63,7 @@ func main() {
 				containerId = t.ContainerID
 				pid = t.Pid
 				action = "start"
-				time.Sleep(time.Second) //todo
+				// time.Sleep(time.Second) //todo
 			case *events.TaskDelete:
 				containerId = t.ContainerID
 				pid = t.Pid
