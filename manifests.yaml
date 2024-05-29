@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: event-monitor
-        image: escoffier/event-monitor:latest
+        image: escoffier/event-monitor:v0.0.1
         resources:
           limits:
             memory: "64Mi"
