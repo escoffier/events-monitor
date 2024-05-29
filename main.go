@@ -87,6 +87,7 @@ func main() {
 				fmt.Printf("err returned for containerd events. try to restart: %v\n", err)
 				// try to restart listening to container streams
 				msg, errs = newExchange.Subscribe(ctx)
+				time.Sleep(time.Second * 3)
 			}
 		}
 	}
