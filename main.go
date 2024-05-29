@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	containerdCli, err := containerd.New("unix:///run/containerd/containerd.sock", containerd.WithTimeout(time.Second*5))
+	containerdCli, err := containerd.New("/run/containerd/containerd.sock", containerd.WithTimeout(time.Second*5))
 	if err != nil {
 		panic(err.Error())
 	}
